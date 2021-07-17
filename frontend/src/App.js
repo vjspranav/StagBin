@@ -1,7 +1,16 @@
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Editor from "./components/Editor";
+
 function App() {
   return (
-    <div className="App">
-    </div>
+    <Router>
+      <Route exact path="/">
+        <Editor />
+      </Route>
+      <Switch>
+        <Route path="/:id" children={<Editor />} />
+      </Switch>
+    </Router>
   );
 }
 
