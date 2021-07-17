@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Editor from "./components/Editor";
+import MyEditor from "./components/MyEditor";
 
 function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         <Route exact path="/">
-          <Editor />
+          <MyEditor />
         </Route>
         <Route path="/:id">
-          <Editor />
+          <MyEditor />
         </Route>
       </Switch>
     </Router>
