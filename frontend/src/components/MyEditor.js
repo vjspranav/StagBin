@@ -5,7 +5,7 @@ import "react-quill/dist/quill.snow.css";
 
 const MyEditor = () => {
   const { id } = useParams();
-  const [convertedText, setConvertedText] = useState("Some default content");
+  const [convertedText, setConvertedText] = useState(id);
   return (
     <div>
       <ReactQuill
