@@ -1,0 +1,54 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./frontend
+
+    - name: Run the tests and generate coverage report
+      run: npm test -- --coverage
+      working-directory: ./frontend
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+
+    - name: Build
+      run: npm run build
+      working-directory: ./frontend
+
+    - name: Deploy
+      run: |
+        cd frontend
+        git config --global user.name vjspranav
+        git config --global user.email pranavasri@live.in
+        git remote set-url origin https://${github_token}@github.com/${repository}
+        npm run deploy
+      working-directory: ./frontend
+      env:
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+        repository: ${{ github.repository }}
