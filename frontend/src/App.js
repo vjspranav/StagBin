@@ -1,14 +1,16 @@
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Editor from "./components/Editor";
 
 function App() {
   return (
-    <Router>
-      <Route exact path="/">
-        <Editor />
-      </Route>
+    <Router basename={process.env.PUBLIC_URL}>
       <Switch>
-        <Route path="/:id" children={<Editor />} />
+        <Route exact path="/">
+          <Editor />
+        </Route>
+        <Route path="/:id">
+          <Editor />
+        </Route>
       </Switch>
     </Router>
   );
