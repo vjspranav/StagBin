@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import MyEditor from "./components/MyEditor";
-import TopBar from "./components/Topbar";
-import BottomBar from "./components/BottomBar";
+// import TopBar from "./components/Topbar";
+// import BottomBar from "./components/BottomBar";
+import TopAppBar from "./components/TopAppBar";
+import BottomAppBar from "./components/BottomAppBar";
 
 // For Theme
 import { ThemeProvider } from "styled-components";
@@ -20,13 +22,10 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <>
         <GlobalStyles />
-        <div
-          className="App"
-          style={{ paddingTop: "50px", paddingBottom: "50px" }}
-        >
+        <div className="App" style={{ paddingBottom: "20px" }}>
           <Router basename={process.env.PUBLIC_URL}>
             <div>
-              <TopBar toggle={themeToggler} curTheme={theme} />
+              <TopAppBar toggle={themeToggler} curTheme={theme} />
             </div>
             <Switch>
               <Route exact path="/">
@@ -37,7 +36,7 @@ function App() {
               </Route>
             </Switch>
             <div>
-              <BottomBar curTheme={theme} />
+              <BottomAppBar curTheme={theme} />
             </div>
           </Router>
         </div>
