@@ -8,7 +8,6 @@ import BottomBar from "./components/BottomBar";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/GlobalStyles";
 import { lightTheme, darkTheme } from "./components/Themes";
-import { light } from "@material-ui/core/styles/createPalette";
 
 function App() {
   let localTheme = localStorage.getItem("theme");

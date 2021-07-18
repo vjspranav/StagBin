@@ -45,7 +45,6 @@ const ThemeSwitch = withStyles((theme) => ({
   return (
     <Switch
       focusVisibleClassName={classes.focusVisible}
-      disableRipple
       classes={{
         root: classes.root,
         switchBase: classes.switchBase,
@@ -87,7 +86,7 @@ export default function TopBar(props) {
                 {curTheme === "light" ? "Light Theme" : "Dark Theme"}
               </label>
               <ThemeSwitch
-                onChange={() => {
+                onChange={(e) => {
                   props.toggle();
                 }}
                 name="Dark"
