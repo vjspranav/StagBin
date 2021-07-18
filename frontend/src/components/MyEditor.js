@@ -10,7 +10,7 @@ const MyEditor = () => {
     <div>
       <ReactQuill
         theme="snow"
-        value={convertedText}
+        value={convertedText || ""}
         onChange={setConvertedText}
         style={{ minHeight: "100vh" }}
       />
