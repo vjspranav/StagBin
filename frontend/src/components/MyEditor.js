@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
 
 const MyEditor = () => {
   const { id } = useParams();
@@ -9,7 +10,7 @@ const MyEditor = () => {
   return (
     <div>
       <ReactQuill
-        theme="snow"
+        theme="bubble"
         value={convertedText || ""}
         onChange={setConvertedText}
       />
