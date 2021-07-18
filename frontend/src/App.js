@@ -8,13 +8,14 @@ import BottomBar from "./components/BottomBar";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/GlobalStyles";
 import { lightTheme, darkTheme } from "./components/Themes";
+import { light } from "@material-ui/core/styles/createPalette";
 
 function App() {
   let localTheme = localStorage.getItem("theme");
   const [theme, setTheme] = useState(localTheme ? localTheme : "light");
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
   };
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
