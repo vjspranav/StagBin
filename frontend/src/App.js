@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import MyEditor from "./components/MyEditor";
+import TopBar from "./components/Topbar";
+import BottomBar from "./components/BottomBar";
 
 // For Theme
 import { ThemeProvider } from "styled-components";
@@ -8,7 +10,7 @@ import { GlobalStyles } from "./components/GlobalStyles";
 import { lightTheme, darkTheme } from "./components/Themes";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
@@ -16,19 +18,27 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <>
         <GlobalStyles />
-        <div className="Header">
-          <button onClick={themeToggler}>Switch Theme</button>
+        <div
+          className="App"
+          style={{ paddingTop: "50px", paddingBottom: "50px" }}
+        >
+          <Router basename={process.env.PUBLIC_URL}>
+            <div>
+              <TopBar toggle={themeToggler} curTheme={theme} />
+            </div>
+            <Switch>
+              <Route exact path="/">
+                <MyEditor />
+              </Route>
+              <Route path="/:id">
+                <MyEditor />
+              </Route>
+            </Switch>
+            <div>
+              <BottomBar curTheme={theme} />
+            </div>
+          </Router>
         </div>
-        <Router basename={process.env.PUBLIC_URL}>
-          <Switch>
-            <Route exact path="/">
-              <MyEditor />
-            </Route>
-            <Route path="/:id">
-              <MyEditor />
-            </Route>
-          </Switch>
-        </Router>
       </>
     </ThemeProvider>
   );

@@ -12,7 +12,6 @@ const MyEditor = () => {
         theme="snow"
         value={convertedText || ""}
         onChange={setConvertedText}
-        style={{ minHeight: "100vh" }}
       />
     </div>
   );
