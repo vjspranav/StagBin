@@ -10,9 +10,11 @@ import { GlobalStyles } from "./components/GlobalStyles";
 import { lightTheme, darkTheme } from "./components/Themes";
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  let localTheme = localStorage.getItem("theme");
+  const [theme, setTheme] = useState(localTheme ? localTheme : "light");
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
+    localStorage.setItem("theme", theme);
   };
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
