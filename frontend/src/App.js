@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState } from "react";
-import MyEditor from "./components/MyEditor";
+// import MyEditor from "./components/MyEditor";
 // import TopBar from "./components/Topbar";
 // import BottomBar from "./components/BottomBar";
+import MEditor from "./components/MonacoEditor";
 import TopAppBar from "./components/TopAppBar";
 import BottomAppBar from "./components/BottomAppBar";
 
@@ -22,17 +23,17 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <>
         <GlobalStyles />
-        <div className="App" style={{ paddingBottom: "20px" }}>
+        <div className="App" style={{}}>
           <Router basename={process.env.PUBLIC_URL}>
             <div>
               <TopAppBar toggle={themeToggler} curTheme={theme} />
             </div>
             <Switch>
               <Route exact path="/">
-                <MyEditor />
+                <MEditor curTheme={theme} />
               </Route>
               <Route path="/:id">
-                <MyEditor />
+                <MEditor curTheme={theme} />
               </Route>
             </Switch>
             <div>
