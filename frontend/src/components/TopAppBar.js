@@ -62,7 +62,7 @@ export default function BackToTop(props) {
       <CssBaseline />
       <AppBar color="white">
         <Toolbar>
-          <Typography variant="h6">vjsbin</Typography>
+          <Typography variant="h6">StagBIN</Typography>
           <Button
             style={{ position: "fixed", right: "0" }}
             color="inherit"
