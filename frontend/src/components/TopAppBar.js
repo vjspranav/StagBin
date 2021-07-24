@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -27,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(2),
     minHeight: "10px",
   },
-
+  centerItems: {
+    justifyContent: "space-between",
+  },
   urlEdit: {
     justifyContent: "center",
     marginLeft: "500px",
@@ -76,12 +77,10 @@ export default function BackToTop(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar color="white">
-        <Toolbar>
+      <AppBar style={{ background: "inherit", color: "inherit" }}>
+        <Toolbar className={classes.centerItems}>
           <Typography variant="h6">StagBIN</Typography>
-          <FormControl
-            className={clsx(classes.margin, classes.textField, classes.urlEdit)}
-          >
+          <FormControl>
             <InputLabel htmlFor="custom-url">URL</InputLabel>
             <Input
               id="custom-url"
@@ -91,6 +90,7 @@ export default function BackToTop(props) {
                 console.log(e.target.value);
                 setUrl(e.target.value);
               }}
+              style={{ color: "inherit" }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -103,7 +103,6 @@ export default function BackToTop(props) {
             />
           </FormControl>
           <Button
-            style={{ position: "fixed", right: "0" }}
             color="inherit"
             onClick={() => {
               props.toggle();

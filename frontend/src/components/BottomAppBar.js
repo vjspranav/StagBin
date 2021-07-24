@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     top: "auto",
   },
   toolbar: {
-    minHeight: "20px",
+    minHeight: "30px",
   },
 }));
 
@@ -20,13 +20,14 @@ export default function BottomAppBar() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="fixed" color="white" className={classes.appBar}>
+      <AppBar
+        position="fixed"
+        style={{ background: "inherit", color: "inherit" }}
+        className={classes.appBar}
+      >
         <Toolbar className={classes.toolbar}>
-          <Link to="/" className="navbar-brand">
-            {" "}
-            <small style={{ color: "black" }}>
-              &copy; Copyright 2021, vjspranav
-            </small>{" "}
+          <Link to="/" className="navbar-brand" style={{ color: "inherit" }}>
+            <small>&copy; Copyright 2021, vjspranav</small>
           </Link>{" "}
         </Toolbar>
       </AppBar>
