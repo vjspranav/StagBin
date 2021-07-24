@@ -1,4 +1,6 @@
 import React from "react";
+import clsx from "clsx";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useState } from "react";
@@ -12,6 +14,11 @@ import Zoom from "@material-ui/core/Zoom";
 import { Button } from "@material-ui/core";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import Input from "@material-ui/core/Input";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +26,12 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(1),
     right: theme.spacing(2),
     minHeight: "10px",
+  },
+
+  urlEdit: {
+    justifyContent: "center",
+    marginLeft: "500px",
+    paddingBottom: "15px",
   },
 }));
 
@@ -57,12 +70,38 @@ export default function BackToTop(props) {
   const curTheme = props.curTheme;
   // 0 = white, 1 = dark
   const [icon, setIcon] = useState(curTheme === "dark");
+  const [url, setUrl] = useState("");
+  const classes = useStyles();
+
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar color="white">
         <Toolbar>
           <Typography variant="h6">StagBIN</Typography>
+          <FormControl
+            className={clsx(classes.margin, classes.textField, classes.urlEdit)}
+          >
+            <InputLabel htmlFor="custom-url">URL</InputLabel>
+            <Input
+              id="custom-url"
+              type="text"
+              value={url}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setUrl(e.target.value);
+              }}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="cop"
+                    // onClick={handleClickShowPassword}
+                    // onMouseDown={handleMouseDownPassword}
+                  ></IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
           <Button
             style={{ position: "fixed", right: "0" }}
             color="inherit"
