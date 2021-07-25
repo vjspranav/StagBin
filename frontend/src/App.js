@@ -4,6 +4,7 @@ import { useState } from "react";
 // import TopBar from "./components/Topbar";
 // import BottomBar from "./components/BottomBar";
 import MEditor from "./components/MonacoEditor";
+import MobileTopAppBar from "./components/MobileTopAppBar";
 import TopAppBar from "./components/TopAppBar";
 import BottomAppBar from "./components/BottomAppBar";
 
@@ -11,6 +12,8 @@ import BottomAppBar from "./components/BottomAppBar";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/GlobalStyles";
 import { lightTheme, darkTheme } from "./components/Themes";
+
+import MediaQuery from "react-responsive";
 
 function App() {
   let localTheme = localStorage.getItem("theme");
@@ -41,11 +44,20 @@ function App() {
         <div onKeyDown={handleKeyDown} className="App" style={{}}>
           <Router basename={process.env.PUBLIC_URL}>
             <div>
-              <TopAppBar
-                toggle={themeToggler}
-                curTheme={theme}
-                isEditing={true}
-              />
+              <MediaQuery maxWidth={480}>
+                <MobileTopAppBar
+                  toggle={themeToggler}
+                  curTheme={theme}
+                  isEditing={true}
+                />
+              </MediaQuery>
+              <MediaQuery minWidth={480}>
+                <TopAppBar
+                  toggle={themeToggler}
+                  curTheme={theme}
+                  isEditing={true}
+                />
+              </MediaQuery>
             </div>
             <Switch>
               <Route exact path="/">
