@@ -23,6 +23,7 @@ let mongouri = dbconfig.mongouri;
 mongoose.connect(mongouri + "/" + DB_NAME, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 const connection = mongoose.connection;
 connection.once("open", function () {
@@ -33,6 +34,7 @@ connection.once("open", function () {
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var pasteRouter = require("./routes/paste");
 
 var app = express();
 
@@ -49,6 +51,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/paste", pasteRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
