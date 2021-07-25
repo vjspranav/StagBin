@@ -13,11 +13,15 @@ import Zoom from "@material-ui/core/Zoom";
 import { Button } from "@material-ui/core";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import AddIcon from "@material-ui/icons/Add";
+import SaveIcon from "@material-ui/icons/Save";
+import EditIcon from "@material-ui/icons/Edit";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import Input from "@material-ui/core/Input";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,6 +73,7 @@ function ScrollTop(props) {
 
 export default function BackToTop(props) {
   const curTheme = props.curTheme;
+  const isEditing = props.isEditing;
   // 0 = white, 1 = dark
   const [icon, setIcon] = useState(curTheme === "dark");
   const [url, setUrl] = useState("");
@@ -102,15 +107,35 @@ export default function BackToTop(props) {
               }
             />
           </FormControl>
-          <Button
-            color="inherit"
-            onClick={() => {
-              props.toggle();
-              setIcon(!icon);
-            }}
-          >
-            {icon ? <WbSunnyIcon /> : <NightsStayIcon />}
-          </Button>
+          <div>
+            {isEditing ? (
+              <Tooltip title="Save">
+                <IconButton edge="end" color="inherit" aria-label="Save">
+                  <SaveIcon />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Edit">
+                <IconButton edge="end" color="inherit" aria-label="Save">
+                  <EditIcon />
+                </IconButton>
+              </Tooltip>
+            )}
+            <Tooltip title="New Paste">
+              <IconButton edge="end" color="inherit" aria-label="Save">
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
+            <Button
+              color="inherit"
+              onClick={() => {
+                props.toggle();
+                setIcon(!icon);
+              }}
+            >
+              {icon ? <WbSunnyIcon /> : <NightsStayIcon />}
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />

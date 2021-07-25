@@ -14,14 +14,20 @@ export default function MEditor(props) {
   );
 
   const editor = (
-    <Editor
-      theme={curTheme === "light" ? "light" : "vs-dark"}
-      height="88vh"
-      defaultLanguage="javascript"
-      defaultValue={id ? "content from " + id : "//Enter text"}
-      colorDecorators="true"
-      automaticLayout="true"
-    />
+    <div
+      style={{
+        overflow: "hidden",
+      }}
+    >
+      <Editor
+        theme={curTheme === "light" ? "light" : "vs-dark"}
+        height="88vh"
+        defaultLanguage="javascript"
+        defaultValue={id ? "content from " + id : "//Enter text"}
+        colorDecorators="true"
+        automaticLayout="true"
+      />
+    </div>
   );
   console.log(id);
 

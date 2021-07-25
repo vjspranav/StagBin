@@ -26,7 +26,11 @@ function App() {
         <div className="App" style={{}}>
           <Router basename={process.env.PUBLIC_URL}>
             <div>
-              <TopAppBar toggle={themeToggler} curTheme={theme} />
+              <TopAppBar
+                toggle={themeToggler}
+                curTheme={theme}
+                isEditing={true}
+              />
             </div>
             <Switch>
               <Route exact path="/">
