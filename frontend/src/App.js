@@ -19,11 +19,26 @@ function App() {
     theme === "light" ? setTheme("dark") : setTheme("light");
     localStorage.setItem("theme", theme === "light" ? "dark" : "light");
   };
+
+  const handleKeyDown = (event) => {
+    let charCode = String.fromCharCode(event.which).toLowerCase();
+    if (event.ctrlKey && charCode === "s") {
+      event.preventDefault();
+      console.log("Ctrl + S pressed");
+    }
+
+    // For Mac
+    if (event.metaKey && charCode === "s") {
+      event.preventDefault();
+      console.log("Cmd + S pressed");
+    }
+  };
+
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <>
         <GlobalStyles />
-        <div className="App" style={{}}>
+        <div onKeyDown={handleKeyDown} className="App" style={{}}>
           <Router basename={process.env.PUBLIC_URL}>
             <div>
               <TopAppBar
