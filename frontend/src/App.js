@@ -27,7 +27,7 @@ const get_and_set_systemid = async () => {
 };
 
 const post_save = async (data, custom_url_code, system_id) => {
-  const res = await axios.post("https://api.stagbin.tk/paste/new", {
+  const res = await axios.post("http://localhost:3000/paste/new", {
     data,
     system_id,
     custom_url_code,

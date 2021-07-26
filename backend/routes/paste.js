@@ -87,7 +87,9 @@ router.post("/new", async (req, res, next) => {
       res.status(200).send(result);
     })
     .catch((err) => {
-      res.status(400).send(err);
+      if (err.codeName === "BSONObjectTooLarge")
+        res.status(400).send("Cannot Upload File larger than 16mb");
+      else res.status(400).send(err);
     });
 });
 
