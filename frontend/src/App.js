@@ -41,6 +41,8 @@ const post_save = async (data, custom_url_code, system_id) => {
     custom_url_code,
   });
   if (res.status === 200) {
+    navigator.clipboard.writeText(res.data.shortUrl);
+    alert("Url copied to clipboard");
     window.location.href = res.data.shortUrl;
   } else {
     console.log(res.status);
@@ -84,8 +86,6 @@ function App() {
   const invokeSave = async () => {
     const system_id = await get_and_set_systemid();
     post_save(data, url, system_id);
-    navigator.clipboard.writeText("https://stagbin.tk/" + url);
-    alert("Url copied to clipboard");
   };
 
   return (
