@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -26,9 +25,17 @@ export default function BottomAppBar() {
         className={classes.appBar}
       >
         <Toolbar className={classes.toolbar}>
-          <Link to="/" className="navbar-brand" style={{ color: "inherit" }}>
+          <a href="https://stagbin.tk" style={{ color: "black" }}>
             <small>&copy; Copyright 2021, vjspranav</small>
-          </Link>{" "}
+          </a>
+          <div style={{ margin: "8px" }}>
+            <a
+              href="https://github.com/vjspranav/Stagbin"
+              style={{ color: "black" }}
+            >
+              <h4 style={{ margin: 0 }}>Source</h4>
+            </a>
+          </div>
         </Toolbar>
       </AppBar>
     </React.Fragment>
