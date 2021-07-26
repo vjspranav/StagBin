@@ -16,6 +16,7 @@ import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import AddIcon from "@material-ui/icons/Add";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -78,6 +79,8 @@ export default function BackToTop(props) {
   const [icon, setIcon] = useState(curTheme === "dark");
   const [url, setUrl] = [props.url, props.setUrl];
   const classes = useStyles();
+  const readOnly = props.readOnly;
+  // const setReadOnly = props.setReadOnly;
 
   return (
     <React.Fragment>
@@ -90,6 +93,7 @@ export default function BackToTop(props) {
             <Input
               id="custom-url"
               type="text"
+              disabled={readOnly ? true : false}
               value={url}
               onChange={(e) => {
                 console.log(e.target.value);
@@ -97,13 +101,22 @@ export default function BackToTop(props) {
               }}
               style={{ color: "inherit" }}
               endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="cop"
-                    // onClick={handleClickShowPassword}
-                    // onMouseDown={handleMouseDownPassword}
-                  ></IconButton>
-                </InputAdornment>
+                readOnly ? (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="cop"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          "https://stagbin.tk/" + url
+                        );
+                      }}
+                    >
+                      <FileCopyIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ) : (
+                  ""
+                )
               }
             />
           </FormControl>

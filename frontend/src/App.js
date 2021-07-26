@@ -27,13 +27,13 @@ const get_and_set_systemid = async () => {
 };
 
 const post_save = async (data, custom_url_code, system_id) => {
-  const res = await axios.get("https://api.stagbin.tk/paste/new", {
+  const res = await axios.post("https://api.stagbin.tk/paste/new", {
     data,
     system_id,
     custom_url_code,
   });
   if (res.status === 200) {
-    console.log(res.data);
+    window.location.href = res.data.shortUrl;
   } else {
     console.log(res.status);
     console.log(res.data);
@@ -60,6 +60,8 @@ function App() {
     if (event.ctrlKey && charCode === "s") {
       event.preventDefault();
       post_save(data, url, system_id);
+      navigator.clipboard.writeText("https://stagbin.tk/" + url);
+      alert("Url copied to clipboard");
     }
 
     // For Mac
@@ -67,6 +69,8 @@ function App() {
       event.preventDefault();
       console.log("Cmd + S pressed");
       post_save(data, url, system_id);
+      navigator.clipboard.writeText("https://stagbin.tk/" + url);
+      alert("Url copied to clipboard");
     }
   };
 
@@ -107,6 +111,7 @@ function App() {
                   readOnly={readOnly}
                   setReadOnly={setReadOnly}
                   url={url}
+                  setUrl={setUrl}
                   data={data}
                   setData={setData}
                 />
@@ -117,6 +122,7 @@ function App() {
                   readOnly={readOnly}
                   setReadOnly={setReadOnly}
                   url={url}
+                  setUrl={setUrl}
                   data={data}
                   setData={setData}
                 />

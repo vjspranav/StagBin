@@ -11,9 +11,9 @@ const getData = async (setData, id) => {
   });
   console.log(res);
   if (res.status === 200) {
-    setData(res.data[0].data);
     reqData = res.data[0];
     console.log(reqData);
+    setData(reqData.data);
     // setLoading(false);
   }
   if (reqData.isUrl) {
@@ -25,12 +25,14 @@ export default function MEditor(props) {
   const curTheme = props.curTheme;
   const readOnly = props.readOnly;
   const setReadOnly = props.setReadOnly;
+  const setUrl = props.setUrl;
   const isDiff = false;
   const [data, setData] = [props.data, props.setData];
   // const [loading, setLoading] = useState(false);
   const { id } = useParams();
   if (id) {
     setReadOnly(true);
+    setUrl(id);
     getData(setData, id);
   }
   // if (data) {
@@ -55,7 +57,7 @@ export default function MEditor(props) {
         theme={curTheme === "light" ? "light" : "vs-dark"}
         height="88vh"
         defaultLanguage="javascript"
-        defaultValue={data}
+        value={data}
         colorDecorators="true"
         options={{
           readOnly: readOnly,
