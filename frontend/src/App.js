@@ -14,28 +14,59 @@ import { GlobalStyles } from "./components/GlobalStyles";
 import { lightTheme, darkTheme } from "./components/Themes";
 
 import MediaQuery from "react-responsive";
+import axios from "axios";
+
+const get_and_set_systemid = async () => {
+  let system_id = localStorage.getItem("stagbin_system_id");
+  if (!system_id) {
+    let res = await axios.get("https://api.stagbin.tk/paste/newSystemID");
+    system_id = res.data.system_id;
+    localStorage.setItem("stagbin_system_id", system_id);
+  }
+  return system_id;
+};
+
+const post_save = async (data, custom_url_code, system_id) => {
+  const res = await axios.get("https://api.stagbin.tk/paste/new", {
+    data,
+    system_id,
+    custom_url_code,
+  });
+  if (res.status === 200) {
+    console.log(res.data);
+  } else {
+    console.log(res.status);
+    console.log(res.data);
+  }
+};
 
 function App() {
-  let localTheme = localStorage.getItem("theme");
+  let localTheme = localStorage.getItem("stagbin_theme");
   const [theme, setTheme] = useState(localTheme ? localTheme : "light");
   const [readOnly, setReadOnly] = useState("false");
+  const [url, setUrl] = useState("");
+  const [data, setData] = useState(
+    "//Enter text and press ctrl + s to save, this also acts as a url shortner if you paste a http(s) url instead"
+  );
 
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
-    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
+    localStorage.setItem("stagbin_theme", theme === "light" ? "dark" : "light");
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = async (event) => {
     let charCode = String.fromCharCode(event.which).toLowerCase();
+    const system_id = await get_and_set_systemid();
     if (event.ctrlKey && charCode === "s") {
       event.preventDefault();
-      console.log("Ctrl + S pressed");
+      post_save(data, url, system_id);
     }
 
     // For Mac
     if (event.metaKey && charCode === "s") {
       event.preventDefault();
       console.log("Cmd + S pressed");
+      post_save(data, url, system_id);
     }
   };
 
@@ -53,6 +84,8 @@ function App() {
                   readOnly={readOnly}
                   curTheme={theme}
                   isEditing={true}
+                  url={url}
+                  setUrl={setUrl}
                 />
               </MediaQuery>
               <MediaQuery minWidth={480}>
@@ -62,6 +95,8 @@ function App() {
                   readOnlyToggle={setReadOnly}
                   curTheme={theme}
                   isEditing={true}
+                  url={url}
+                  setUrl={setUrl}
                 />
               </MediaQuery>
             </div>
@@ -71,6 +106,9 @@ function App() {
                   curTheme={theme}
                   readOnly={readOnly}
                   setReadOnly={setReadOnly}
+                  url={url}
+                  data={data}
+                  setData={setData}
                 />
               </Route>
               <Route path="/:id">
@@ -78,6 +116,9 @@ function App() {
                   curTheme={theme}
                   readOnly={readOnly}
                   setReadOnly={setReadOnly}
+                  url={url}
+                  data={data}
+                  setData={setData}
                 />
               </Route>
             </Switch>

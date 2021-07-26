@@ -38,7 +38,7 @@ router.get("/", async (req, res, next) => {
   });
 });
 
-router.post("/newSystemID", async (req, res, next) => {
+router.get("/newSystemID", async (req, res, next) => {
   const newID = await create_system_id();
   res.send({ status: "Success", system_id: newID });
 });

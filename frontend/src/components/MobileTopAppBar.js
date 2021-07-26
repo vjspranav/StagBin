@@ -113,7 +113,7 @@ export default function BackToTop(props) {
   const isEditing = props.isEditing;
   // 0 = white, 1 = dark
   const [icon, setIcon] = useState(curTheme === "dark");
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = [props.url, props.setUrl];
   const classes = useStyles();
 
   return (
