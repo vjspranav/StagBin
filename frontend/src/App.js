@@ -42,6 +42,10 @@ const post_save = async (data, custom_url_code, system_id) => {
 
 function App() {
   let localTheme = localStorage.getItem("stagbin_theme");
+  // const history = useHistory();
+
+  // console.log(history);
+
   const [theme, setTheme] = useState(localTheme ? localTheme : "light");
   const [readOnly, setReadOnly] = useState(false);
   const [url, setUrl] = useState("");

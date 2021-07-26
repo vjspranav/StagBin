@@ -74,7 +74,7 @@ function ScrollTop(props) {
 
 export default function BackToTop(props) {
   const curTheme = props.curTheme;
-  const isEditing = props.isEditing;
+  // const isEditing = props.isEditing;
   // 0 = white, 1 = dark
   const [icon, setIcon] = useState(curTheme === "dark");
   const [url, setUrl] = [props.url, props.setUrl];
@@ -122,16 +122,16 @@ export default function BackToTop(props) {
             />
           </FormControl>
           <div>
-            {isEditing ? (
-              <Tooltip title="Save">
-                <IconButton edge="end" color="inherit" aria-label="Save">
-                  <SaveIcon />
-                </IconButton>
-              </Tooltip>
-            ) : (
+            {readOnly ? (
               <Tooltip title="Edit">
                 <IconButton edge="end" color="inherit" aria-label="Save">
                   <EditIcon />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Save">
+                <IconButton edge="end" color="inherit" aria-label="Save">
+                  <SaveIcon />
                 </IconButton>
               </Tooltip>
             )}

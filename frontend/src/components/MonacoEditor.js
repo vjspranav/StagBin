@@ -6,18 +6,20 @@ import axios from "axios";
 let reqData = {};
 const getData = async (setData, id) => {
   // setLoading(true);
-  const res = await axios.post("https://api.stagbin.tk/paste/get", {
-    custom_url_code: id,
-  });
+  const res = await axios
+    .post("https://api.stagbin.tk/paste/get", {
+      custom_url_code: id,
+    })
+    .catch((err) => {
+      // alert("invalid url");
+      window.location.href = "https://stagbin.tk";
+    });
   console.log(res);
   if (res.status === 200) {
     reqData = res.data;
     console.log(reqData);
     setData(reqData.data);
     // setLoading(false);
-  } else {
-    alert("invalid url");
-    window.location.href = "https://stagbin.tk";
   }
   if (reqData.isUrl) {
     window.location.href = reqData.data;
