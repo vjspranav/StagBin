@@ -16,6 +16,7 @@ import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import AddIcon from "@material-ui/icons/Add";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -114,8 +115,10 @@ export default function BackToTop(props) {
   // 0 = white, 1 = dark
   const [icon, setIcon] = useState(curTheme === "dark");
   const [url, setUrl] = [props.url, props.setUrl];
-  const classes = useStyles();
+  const readOnly = props.readOnly;
 
+  const classes = useStyles();
+  console.log(readOnly);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -131,6 +134,7 @@ export default function BackToTop(props) {
             <InputLabel htmlFor="custom-url">URL</InputLabel>
             <Input
               id="custom-url"
+              disabled={readOnly ? true : false}
               type="text"
               value={url}
               onChange={(e) => {
@@ -139,13 +143,22 @@ export default function BackToTop(props) {
               }}
               style={{ color: "inherit", width: "50%" }}
               endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="cop"
-                    // onClick={handleClickShowPassword}
-                    // onMouseDown={handleMouseDownPassword}
-                  ></IconButton>
-                </InputAdornment>
+                readOnly ? (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="cop"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          "https://stagbin.tk/" + url
+                        );
+                      }}
+                    >
+                      <FileCopyIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ) : (
+                  ""
+                )
               }
             />
           </FormControl>

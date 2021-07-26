@@ -95,8 +95,11 @@ router.post("/get", (req, res, next) => {
   const url_code = req.body.custom_url_code;
   Paste.find({ urlCode: url_code })
     .then((result) => {
-      console.log(result);
-      res.status(200).send(result);
+      if (result.length === 1) {
+        res.status(200).send(result[0]);
+      } else {
+        res.status(404).send("Not Found");
+      }
     })
     .catch((err) => {
       res.status(400).send(err);

@@ -11,10 +11,13 @@ const getData = async (setData, id) => {
   });
   console.log(res);
   if (res.status === 200) {
-    reqData = res.data[0];
+    reqData = res.data;
     console.log(reqData);
     setData(reqData.data);
     // setLoading(false);
+  } else {
+    alert("invalid url");
+    window.location.href = "https://stagbin.tk";
   }
   if (reqData.isUrl) {
     window.location.href = reqData.data;
