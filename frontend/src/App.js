@@ -15,23 +15,11 @@ import { lightTheme, darkTheme } from "./components/Themes";
 
 import MediaQuery from "react-responsive";
 
-// https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
-function validURL(str) {
-  var pattern = new RegExp(
-    "^(https?:\\/\\/)?" + // protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-      "(\\#[-a-z\\d_]*)?$",
-    "i"
-  ); // fragment locator
-  return !!pattern.test(str);
-}
-
 function App() {
   let localTheme = localStorage.getItem("theme");
   const [theme, setTheme] = useState(localTheme ? localTheme : "light");
+  const [readOnly, setReadOnly] = useState("false");
+
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
     localStorage.setItem("theme", theme === "light" ? "dark" : "light");
@@ -61,6 +49,8 @@ function App() {
               <MediaQuery maxWidth={480}>
                 <MobileTopAppBar
                   toggle={themeToggler}
+                  readOnlyToggle={setReadOnly}
+                  readOnly={readOnly}
                   curTheme={theme}
                   isEditing={true}
                 />
@@ -68,6 +58,8 @@ function App() {
               <MediaQuery minWidth={480}>
                 <TopAppBar
                   toggle={themeToggler}
+                  readOnly={readOnly}
+                  readOnlyToggle={setReadOnly}
                   curTheme={theme}
                   isEditing={true}
                 />
@@ -75,10 +67,18 @@ function App() {
             </div>
             <Switch>
               <Route exact path="/">
-                <MEditor curTheme={theme} />
+                <MEditor
+                  curTheme={theme}
+                  readOnly={readOnly}
+                  setReadOnly={setReadOnly}
+                />
               </Route>
               <Route path="/:id">
-                <MEditor curTheme={theme} />
+                <MEditor
+                  curTheme={theme}
+                  readOnly={readOnly}
+                  setReadOnly={setReadOnly}
+                />
               </Route>
             </Switch>
             <div>

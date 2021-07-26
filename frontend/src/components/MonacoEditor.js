@@ -1,9 +1,16 @@
 import Editor, { DiffEditor } from "@monaco-editor/react";
 import { useParams } from "react-router-dom";
+
 export default function MEditor(props) {
   const curTheme = props.curTheme;
-  const { id } = useParams();
+  const readOnly = props.readOnly;
+  const setReadOnly = props.setReadOnly;
+  const isDiff = false;
 
+  const { id } = useParams();
+  if (id) {
+    setReadOnly(true);
+  }
   const diffEditor = (
     <DiffEditor
       height="90vh"
@@ -25,11 +32,13 @@ export default function MEditor(props) {
         defaultLanguage="javascript"
         defaultValue={id ? "content from " + id : "//Enter text"}
         colorDecorators="true"
-        automaticLayout="true"
+        options={{
+          readOnly: readOnly,
+        }}
       />
     </div>
   );
-  console.log(id);
+  console.log(readOnly);
 
-  return id ? diffEditor : editor;
+  return isDiff ? diffEditor : editor;
 }
