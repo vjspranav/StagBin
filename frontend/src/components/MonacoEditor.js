@@ -1,5 +1,25 @@
 import Editor, { DiffEditor } from "@monaco-editor/react";
 import { useParams } from "react-router-dom";
+// import { useState } from "react";
+import axios from "axios";
+
+let reqData = {};
+const getData = async (setData, id) => {
+  // setLoading(true);
+  const res = await axios.post("https://api.stagbin.tk/paste/get", {
+    custom_url_code: id,
+  });
+  console.log(res);
+  if (res.status === 200) {
+    setData(res.data[0].data);
+    reqData = res.data[0];
+    console.log(reqData);
+    // setLoading(false);
+  }
+  if (reqData.isUrl) {
+    window.location.href = reqData.data;
+  }
+};
 
 export default function MEditor(props) {
   const curTheme = props.curTheme;
@@ -7,9 +27,11 @@ export default function MEditor(props) {
   const setReadOnly = props.setReadOnly;
   const isDiff = false;
   const [data, setData] = [props.data, props.setData];
+  // const [loading, setLoading] = useState(false);
   const { id } = useParams();
   if (id) {
     setReadOnly(true);
+    getData(setData, id);
   }
   // if (data) {
   //   document.getElementById("m-placeholder").style.display = "none";
@@ -40,7 +62,6 @@ export default function MEditor(props) {
         }}
         onChange={(value, event) => {
           setData(value);
-          console.log(data);
         }}
       />
     </div>
