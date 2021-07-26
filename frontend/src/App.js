@@ -60,22 +60,24 @@ function App() {
 
   const handleKeyDown = async (event) => {
     let charCode = String.fromCharCode(event.which).toLowerCase();
-    const system_id = await get_and_set_systemid();
     if (event.ctrlKey && charCode === "s") {
       event.preventDefault();
-      post_save(data, url, system_id);
-      navigator.clipboard.writeText("https://stagbin.tk/" + url);
-      alert("Url copied to clipboard");
+      invokeSave();
     }
 
     // For Mac
     if (event.metaKey && charCode === "s") {
       event.preventDefault();
       console.log("Cmd + S pressed");
-      post_save(data, url, system_id);
-      navigator.clipboard.writeText("https://stagbin.tk/" + url);
-      alert("Url copied to clipboard");
+      invokeSave();
     }
+  };
+
+  const invokeSave = async () => {
+    const system_id = await get_and_set_systemid();
+    post_save(data, url, system_id);
+    navigator.clipboard.writeText("https://stagbin.tk/" + url);
+    alert("Url copied to clipboard");
   };
 
   return (
@@ -94,6 +96,7 @@ function App() {
                   isEditing={true}
                   url={url}
                   setUrl={setUrl}
+                  invokeSave={invokeSave}
                 />
               </MediaQuery>
               <MediaQuery minWidth={480}>
@@ -105,6 +108,7 @@ function App() {
                   isEditing={true}
                   url={url}
                   setUrl={setUrl}
+                  invokeSave={invokeSave}
                 />
               </MediaQuery>
             </div>
@@ -118,6 +122,7 @@ function App() {
                   setUrl={setUrl}
                   data={data}
                   setData={setData}
+                  invokeSave={invokeSave}
                 />
               </Route>
               <Route path="/:id">

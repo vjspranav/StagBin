@@ -81,6 +81,7 @@ export default function BackToTop(props) {
   const readOnly = props.readOnly;
   console.log(readOnly);
   const classes = useStyles();
+  const invokeSave = props.invokeSave;
   // const setReadOnly = props.setReadOnly;
 
   return (
@@ -130,13 +131,25 @@ export default function BackToTop(props) {
               </Tooltip>
             ) : (
               <Tooltip title="Save">
-                <IconButton edge="end" color="inherit" aria-label="Save">
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  aria-label="Save"
+                  onClick={invokeSave}
+                >
                   <SaveIcon />
                 </IconButton>
               </Tooltip>
             )}
             <Tooltip title="New Paste">
-              <IconButton edge="end" color="inherit" aria-label="Save">
+              <IconButton
+                edge="end"
+                color="inherit"
+                aria-label="Save"
+                onClick={() => {
+                  window.location.href = "https://stagbin.tk";
+                }}
+              >
                 <AddIcon />
               </IconButton>
             </Tooltip>

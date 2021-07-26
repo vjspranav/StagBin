@@ -111,11 +111,12 @@ function ScrollTop(props) {
 
 export default function BackToTop(props) {
   const curTheme = props.curTheme;
-  const isEditing = props.isEditing;
+  // const isEditing = props.isEditing;
   // 0 = white, 1 = dark
   const [icon, setIcon] = useState(curTheme === "dark");
   const [url, setUrl] = [props.url, props.setUrl];
   const readOnly = props.readOnly;
+  const invokeSave = props.invokeSave;
 
   const classes = useStyles();
   console.log(readOnly);
@@ -169,23 +170,38 @@ export default function BackToTop(props) {
                 labelId="demo-customized-select-label"
                 id="demo-customized-select"
                 // value={}
-                // onChange={}
+                onChange={(event) => {
+                  switch (event.target.value) {
+                    case "save":
+                      invokeSave();
+                      break;
+                    case "new":
+                      window.location.href = "https://stagbin.tk";
+                      break;
+                    case "edit":
+                      break;
+                    default:
+                      break;
+                  }
+                }}
                 input={<BootstrapInput />}
               >
-                <MenuItem>
-                  {isEditing ? (
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <SaveIcon />
-                      <div>Save</div>
-                    </div>
-                  ) : (
+                {readOnly ? (
+                  <MenuItem value="edit">
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <EditIcon />
                       <div>Edit</div>
                     </div>
-                  )}
-                </MenuItem>
-                <MenuItem>
+                  </MenuItem>
+                ) : (
+                  <MenuItem value="save">
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <SaveIcon />
+                      <div>Save</div>
+                    </div>
+                  </MenuItem>
+                )}
+                <MenuItem value="new">
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <AddIcon />
                     <div>New</div>
