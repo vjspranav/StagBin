@@ -90,4 +90,16 @@ router.post("/new", async (req, res, next) => {
       res.status(400).send(err);
     });
 });
+
+router.post("/get", (req, res, next) => {
+  const url_code = req.body.custom_url_code;
+  Paste.find({ urlCode: url_code })
+    .then((result) => {
+      console.log(result);
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
 module.exports = router;
