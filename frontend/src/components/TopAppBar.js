@@ -79,6 +79,7 @@ export default function BackToTop(props) {
   const [icon, setIcon] = useState(curTheme === "dark");
   const [url, setUrl] = [props.url, props.setUrl];
   const readOnly = props.readOnly;
+  console.log(readOnly);
   const classes = useStyles();
   // const setReadOnly = props.setReadOnly;
 

@@ -98,7 +98,7 @@ router.post("/get", (req, res, next) => {
       if (result.length === 1) {
         res.status(200).send(result[0]);
       } else {
-        res.status(404).send("Not Found");
+        res.status(400).send("Not Found");
       }
     })
     .catch((err) => {

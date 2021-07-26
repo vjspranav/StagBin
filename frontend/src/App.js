@@ -43,7 +43,7 @@ const post_save = async (data, custom_url_code, system_id) => {
 function App() {
   let localTheme = localStorage.getItem("stagbin_theme");
   const [theme, setTheme] = useState(localTheme ? localTheme : "light");
-  const [readOnly, setReadOnly] = useState("false");
+  const [readOnly, setReadOnly] = useState(false);
   const [url, setUrl] = useState("");
   const [data, setData] = useState(
     "//Enter text and press ctrl + s to save, this also acts as a url shortner if you paste a http(s) url instead"
