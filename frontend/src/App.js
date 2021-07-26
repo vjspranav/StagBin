@@ -27,7 +27,15 @@ const get_and_set_systemid = async () => {
 };
 
 const post_save = async (data, custom_url_code, system_id) => {
-  const res = await axios.post("http://localhost:3000/paste/new", {
+  function byteCount(s) {
+    return encodeURI(s).split(/%..|./).length - 1;
+  }
+  const size = byteCount(data) / (1024 * 1024);
+  if (size > 5) {
+    alert("Cannot save data larger than 5mb");
+    return;
+  }
+  const res = await axios.post("https://api.stagbin.tk/paste/new", {
     data,
     system_id,
     custom_url_code,
