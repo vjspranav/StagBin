@@ -91,7 +91,9 @@ export default function BackToTop(props) {
         <Toolbar className={classes.centerItems}>
           <Typography variant="h6">StagBIN</Typography>
           <FormControl>
-            <InputLabel htmlFor="custom-url">URL</InputLabel>
+            <InputLabel style={{ color: "inherit" }} htmlFor="custom-url">
+              URL
+            </InputLabel>
             <Input
               id="custom-url"
               type="text"
