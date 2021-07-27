@@ -107,6 +107,7 @@ export default function BackToTop(props) {
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="cop"
+                      color="inherit"
                       onClick={() => {
                         navigator.clipboard.writeText(
                           "https://stagbin.tk/" + url

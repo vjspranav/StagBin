@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BottomAppBar() {
+export default function BottomAppBar(props) {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -25,13 +25,13 @@ export default function BottomAppBar() {
         className={classes.appBar}
       >
         <Toolbar className={classes.toolbar}>
-          <a href="https://stagbin.tk" style={{ color: "black" }}>
+          <a href="https://stagbin.tk" style={{ color: "inherit" }}>
             <small>&copy; Copyright 2021, vjspranav</small>
           </a>
           <div style={{ margin: "8px" }}>
             <a
               href="https://github.com/vjspranav/Stagbin"
-              style={{ color: "black" }}
+              style={{ color: "inherit" }}
             >
               <h4 style={{ margin: 0 }}>Source</h4>
             </a>
