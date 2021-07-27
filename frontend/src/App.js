@@ -58,6 +58,7 @@ function App() {
 
   const [theme, setTheme] = useState(localTheme ? localTheme : "light");
   const [readOnly, setReadOnly] = useState(false);
+  const [language, setLanguage] = useState("python");
   const [url, setUrl] = useState("");
   const [data, setData] = useState(
     "//Enter text and press ctrl + s to save, this also acts as a url shortner if you paste a http(s) url instead"
@@ -117,6 +118,7 @@ function App() {
                   url={url}
                   setUrl={setUrl}
                   invokeSave={invokeSave}
+                  setLanguage={setLanguage}
                 />
               </MediaQuery>
             </div>
@@ -131,6 +133,7 @@ function App() {
                   data={data}
                   setData={setData}
                   invokeSave={invokeSave}
+                  language={language}
                 />
               </Route>
               <Route path="/:id">
@@ -142,6 +145,7 @@ function App() {
                   setUrl={setUrl}
                   data={data}
                   setData={setData}
+                  language={language}
                 />
               </Route>
             </Switch>

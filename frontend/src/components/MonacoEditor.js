@@ -29,6 +29,7 @@ const getData = async (setData, id) => {
 export default function MEditor(props) {
   const curTheme = props.curTheme;
   const readOnly = props.readOnly;
+  const language = props.language;
   const setReadOnly = props.setReadOnly;
   const setUrl = props.setUrl;
   const isDiff = false;
@@ -46,7 +47,7 @@ export default function MEditor(props) {
   const diffEditor = (
     <DiffEditor
       height="90vh"
-      defaultLanguage="javascript"
+      defaultLanguage={language}
       original=""
       modified={id}
     />
@@ -61,7 +62,7 @@ export default function MEditor(props) {
       <Editor
         theme={curTheme === "light" ? "light" : "vs-dark"}
         height="88vh"
-        defaultLanguage="javascript"
+        language={language}
         value={data}
         colorDecorators="true"
         options={{
@@ -73,6 +74,6 @@ export default function MEditor(props) {
       />
     </div>
   );
-
+  console.log(language);
   return isDiff ? diffEditor : editor;
 }

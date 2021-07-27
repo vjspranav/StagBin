@@ -24,6 +24,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Input from "@material-ui/core/Input";
 import Tooltip from "@material-ui/core/Tooltip";
 
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
@@ -38,6 +41,15 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginLeft: "500px",
     paddingBottom: "15px",
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    marginTop: "-5px",
+    color: "inherit",
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -82,6 +94,7 @@ export default function BackToTop(props) {
   console.log(readOnly);
   const classes = useStyles();
   const invokeSave = props.invokeSave;
+  const setLanguage = props.setLanguage;
   // const setReadOnly = props.setReadOnly;
 
   return (
@@ -126,6 +139,33 @@ export default function BackToTop(props) {
             />
           </FormControl>
           <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                style={{ color: "inherit" }}
+                id="demo-simple-select-label"
+              >
+                Language
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                style={{ color: "inherit" }}
+                // value={}
+                onChange={(event) => {
+                  setLanguage(event.target.value);
+                }}
+              >
+                <MenuItem style={{ color: "inherit" }} value="javascript">
+                  Javascript
+                </MenuItem>
+                <MenuItem value="python">Python</MenuItem>
+                <MenuItem value="go">Go Lang</MenuItem>
+                <MenuItem value="html">HTML</MenuItem>
+                <MenuItem value="css">CSS</MenuItem>
+                <MenuItem value="cpp">C/C++</MenuItem>
+                <MenuItem value="java">Java</MenuItem>
+              </Select>
+            </FormControl>
             {readOnly ? (
               <Tooltip title="Edit">
                 <IconButton edge="end" color="inherit" aria-label="Save">
