@@ -7,7 +7,7 @@ let reqData = {};
 const getData = async (setData, id) => {
   // setLoading(true);
   const res = await axios
-    .post("https://api.stagbin.tk/paste/get", {
+    .post("https://apiv1.stagbin.tk/paste/get", {
       custom_url_code: id,
     })
     .catch((err) => {
