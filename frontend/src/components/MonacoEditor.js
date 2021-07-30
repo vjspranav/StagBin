@@ -12,7 +12,7 @@ const getData = async (setData, id) => {
     })
     .catch((err) => {
       // alert("invalid url");
-      window.location.href = "https://stagbin.tk";
+      window.location.href = "https://old.stagbin.tk";
     });
   console.log(res);
   if (res.status === 200) {
