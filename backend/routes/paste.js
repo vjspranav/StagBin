@@ -9,7 +9,7 @@ const Paste = require("../models/paste");
 const SystemID = require("../models/systemid");
 
 const nanoid = customAlphabet("1234567890abcdefghijklmnopqrstuvw", 7);
-const base_url = "https://old.stagbin.tk/";
+const base_url = "https://old.stagb.in/";
 const check_system_id = async (system_id) => {
   if (ObjectId.isValid(system_id)) {
     const found = await SystemID.find({ _id: system_id });

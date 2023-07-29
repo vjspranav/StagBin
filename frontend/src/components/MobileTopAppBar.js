@@ -150,7 +150,7 @@ export default function BackToTop(props) {
                       aria-label="cop"
                       onClick={() => {
                         navigator.clipboard.writeText(
-                          "https://stagbin.tk/" + url
+                          "https://stagb.in/" + url
                         );
                       }}
                     >
@@ -176,7 +176,7 @@ export default function BackToTop(props) {
                       invokeSave();
                       break;
                     case "new":
-                      window.location.href = "https://stagbin.tk";
+                      window.location.href = "https://stagb.in";
                       break;
                     case "edit":
                       break;

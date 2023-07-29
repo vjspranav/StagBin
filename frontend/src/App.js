@@ -19,7 +19,7 @@ import axios from "axios";
 const get_and_set_systemid = async () => {
   let system_id = localStorage.getItem("stagbin_system_id");
   if (!system_id) {
-    let res = await axios.get("https://apiv1.stagbin.tk/paste/newSystemID");
+    let res = await axios.get("https://apiv1.stagb.in/paste/newSystemID");
     system_id = res.data.system_id;
     localStorage.setItem("stagbin_system_id", system_id);
   }
@@ -35,7 +35,7 @@ const post_save = async (data, custom_url_code, system_id) => {
     alert("Cannot save data larger than 5mb");
     return;
   }
-  const res = await axios.post("https://apiv1.stagbin.tk/paste/new", {
+  const res = await axios.post("https://apiv1.stagb.in/paste/new", {
     data,
     system_id,
     custom_url_code,

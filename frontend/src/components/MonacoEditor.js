@@ -7,12 +7,12 @@ let reqData = {};
 const getData = async (setData, id) => {
   // setLoading(true);
   const res = await axios
-    .post("https://apiv1.stagbin.tk/paste/get", {
+    .post("https://apiv1.stagb.in/paste/get", {
       custom_url_code: id,
     })
     .catch((err) => {
       // alert("invalid url");
-      window.location.href = "https://old.stagbin.tk";
+      window.location.href = "https://old.stagb.in";
     });
   console.log(res);
   if (res.status === 200) {

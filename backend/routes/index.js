@@ -5,7 +5,7 @@ var router = express.Router();
 router.get("/", (req, res, next) => {
   res.render("index", {
     title: "ApiGateway of StagBin",
-    url: "https://stagbin.tk",
+    url: "https://stagb.in",
   });
 });
 
